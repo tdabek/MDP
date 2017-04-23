@@ -18,7 +18,10 @@ To download 350 questions from SO, which are tagged as python :
 python stackoverflow.py sdd python 350 pythonrawdump.json 
 </code>
 
-To clean downloaded data
+
+
+To clean downloaded data:
+
 
 <code>
 python stackoverflow.py c pythonrawdump.json pythonformateddump.json
@@ -30,4 +33,18 @@ To use Reddit module, downloading and installig PRAW is necessary
 
 **LINK:** https://github.com/praw-dev/praw
 
-What is more, to run reddit you need to generate unique OAuth key to API. The key is not published in public repo because of security reason.
+What is more, to run reddit you need to generate unique OAuth key to API. The key used by us in development process is not published in public repo because of security reason.
+
+We do not figure how to download raw data using PRAW, so we decided to download data into common format in single step. In this case, we do not think about separate cleaning working module. 
+
+### Sample usage 
+
+To download 10 topics with comments from subreddit *learnpython*
+
+<code>
+python reddit.py sdd learnpython 10 pythonrawdump.json id secret agent
+</code>
+
+Where <code>id</code> is client id generated in reddit account, <code>secret</code> is OAuth secret geenrated by reddit and <code>agent</code> is user agent, which fulfill Reddit API usage policy 
+
+
