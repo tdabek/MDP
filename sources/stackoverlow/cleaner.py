@@ -12,7 +12,7 @@ from cleaningUtils import processSORecord
 from cleanedObject import *
 
 
-def cleanData(input_path,output_path):
+def clean(input_path,output_path):
     #given parameter with fileName with SO dump
     f = open(input_path,'r')
     input = f.read()
