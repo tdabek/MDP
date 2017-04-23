@@ -21,19 +21,27 @@ def clean(input_path,output_path):
     #json files
     json_files = json.loads(input)
 
-    output_list = []
-
+    output = open(output_path,'w')
+    output.write('[')
+    iterator = 1
+    length = len(json_files)
     #main loop
     for question in json_files :
         #question
         cleanedObject = processSORecord(question)
-        output_list.append(cleanedObject.toJSON())
+        output.write(cleanedObject.toJSON())
+        ans_length = question['answer_count']
+        if(iterator != length or ans_length > 0):
+            output.write(',')
         #answers
-        if question['is_answered'] :
+        if ans_length > 0 :
+            ans_iterator = 1
             for answer in question['answers'] :
                 cleanedObject = processSORecord(answer)
-                output_list.append(cleanedObject.toJSON())
-
-    output = open(output_path,'w')
-    output.write(json.dumps(output_list))
+                output.write(cleanedObject.toJSON())
+                if not (length == iterator and ans_iterator ==  ans_length):
+                    output.write(',')
+                ans_iterator += 1
+        iterator += 1
+    output.write(']')
     output.close()

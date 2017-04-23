@@ -40,4 +40,4 @@ try:
     else:
         print 'Not supported work mode'
 except:
-    print 'Unspecified error occured ' , sys.exc_info()[0]
+    print 'Unspecified error occured ' , sys.exc_info()[0], sys.exc_info()[1]
