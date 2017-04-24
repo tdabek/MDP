@@ -18,7 +18,6 @@ def processSORecord (question):
     creation_time = question['creation_date']
     cleanedObject = CleanedObject()
     cleanedObject.body = cleanedBody
-    cleanedObject.time = time.strftime('%H : %M : %S - %d/%m/%Y',time.gmtime(creation_time))
-    cleanedObject.time_raw = creation_time
     cleanedObject.author = author
+    cleanedObject.date = creation_time
     return cleanedObject
