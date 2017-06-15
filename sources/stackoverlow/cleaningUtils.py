@@ -17,6 +17,7 @@ def processSORecord (question):
     author = question['owner']['display_name']
     creation_time = question['creation_date']
     cleanedObject = CleanedObject()
+    cleanedObject.source = 1 #stackoverflow source
     cleanedObject.body = cleanedBody
     cleanedObject.author = author
     cleanedObject.date = creation_time
