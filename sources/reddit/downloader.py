@@ -10,6 +10,8 @@ def removeTags(text) :
     return re.sub("(<.+?>)",'',text)
 
 def makeCleanedObjectFromSubmission(submission):
+    if submission.author is None:
+        return None
     cleanedObject = CleanedObject()
     body = submission.selftext_html
     body = removeSourceCodeWithCodeTag(body)
@@ -21,6 +23,8 @@ def makeCleanedObjectFromSubmission(submission):
     return cleanedObject
 
 def makeCleanedObjectFromComment(comment):
+    if comment.author is None:
+        return None
     cleanedObject = CleanedObject()
     body = comment.body_html
     body = removeSourceCodeWithCodeTag(body)
@@ -49,7 +53,8 @@ def download(subredit,amount,file_path, id, secret,agent):
         total_num_of_comments = len(comments)
         for comment in comments:
             cleaned = makeCleanedObjectFromComment(comment)
-            f.write(cleaned.toJSON())
+            if not cleaned is None:
+                f.write(cleaned.toJSON())
             if not (amount == iterator and comment_iterator ==  total_num_of_comments):
                 f.write('\n')
             comment_iterator += 1
