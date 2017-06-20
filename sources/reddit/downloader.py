@@ -10,11 +10,13 @@ def removeTags(text) :
     return re.sub("(<.+?>)",'',text)
 
 def makeCleanedObjectFromSubmission(submission):
-    if submission.author is None:
+    if submission.author is None or submission.selftext_html is None or submission.created_utc is None or len(submission.selftext_html) == 0:
         return None
     cleanedObject = CleanedObject()
     body = submission.selftext_html
     body = removeSourceCodeWithCodeTag(body)
+    if len(body) == 0:
+        return None
     body = removeTags(body)
     cleanedObject.body = body
     cleanedObject.author = submission.author.name
@@ -23,11 +25,13 @@ def makeCleanedObjectFromSubmission(submission):
     return cleanedObject
 
 def makeCleanedObjectFromComment(comment):
-    if comment.author is None:
+    if comment.author is None or comment.body_html is None or comment.created_utc is None or len(comment.body_html) == 0:
         return None
     cleanedObject = CleanedObject()
     body = comment.body_html
     body = removeSourceCodeWithCodeTag(body)
+    if len(body) == 0:
+        return None
     body = removeTags(body)
     cleanedObject.body = body
     cleanedObject.author = comment.author.name
@@ -44,7 +48,8 @@ def download(subredit,amount,file_path, id, secret,agent):
     f = open(file_path,'w')
     for submission in reddit.subreddit(subredit).hot(limit=amount):
         cleaned = makeCleanedObjectFromSubmission(submission)
-        f.write(cleaned.toJSON())
+        if not cleaned is None:
+            f.write(cleaned.toJSON())
         comment_iterator = 1
         if amount != iterator or submission.num_comments > 0:
             f.write('\n')
