@@ -1,7 +1,7 @@
 package com.eps.mdp.project.dp.jobs;
 
 import com.eps.mdp.project.dp.mappers.LengthOfMessageMap;
-import com.eps.mdp.project.dp.reducers.LengthOfMessageReducer;
+import com.eps.mdp.project.dp.reducers.LengthOfMessageReduce;
 import com.eps.mdp.project.dp.utils.JsonInputFormat;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -41,7 +41,7 @@ public class LengthOfMessageJob extends Configured implements Tool  {
         FileInputFormat.addInputPath(job, new Path(inputDir));
         FileOutputFormat.setOutputPath(job, new Path(outputDir));
 
-        job.setReducerClass(LengthOfMessageReducer.class);
+        job.setReducerClass(LengthOfMessageReduce.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
 
