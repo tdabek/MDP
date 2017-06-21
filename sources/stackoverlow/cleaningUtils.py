@@ -14,6 +14,8 @@ def processSORecord (question):
     body = question['body']
     cleanedBody = removeSourceCodeWithCodeTag(body)
     cleanedBody = removeTags(cleanedBody)
+    if not 'owner' in question or not 'display_name' in question['owner']:
+        return None
     author = question['owner']['display_name']
     creation_time = question['creation_date']
     cleanedObject = CleanedObject()
