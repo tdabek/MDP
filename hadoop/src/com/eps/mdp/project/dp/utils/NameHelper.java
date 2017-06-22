@@ -5,6 +5,6 @@ package com.eps.mdp.project.dp.utils;
  */
 public class NameHelper {
     public static String resolveName(String source){
-        return source.equals("1") ? "StackOverflow" : "Reddit";
+        return source.equals("1") ? Resources.STACK : Resources.REDDIT;
     }
 }
