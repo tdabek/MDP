@@ -43,8 +43,8 @@ public class ReliableSourceJob extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job, new Path(outputDir));
 
         job.setReducerClass(ReliableSourceReduce.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(Text.class);
 
 
         return (job.waitForCompletion(true) ? 0 : 1);

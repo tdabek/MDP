@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by tomaszdabek on 22.06.2017.
  */
-public class ReliableSourceReduce extends Reducer<Text,IntWritable,Text,IntWritable> {
+public class ReliableSourceReduce extends Reducer<Text,IntWritable,IntWritable,Text> {
 
     private static IntWritable outputValue = new IntWritable();
 
@@ -22,6 +22,6 @@ public class ReliableSourceReduce extends Reducer<Text,IntWritable,Text,IntWrita
             count += val.get();
         }
         outputValue.set(count);
-        context.write(key,outputValue);
+        context.write(outputValue,key);
     }
 }

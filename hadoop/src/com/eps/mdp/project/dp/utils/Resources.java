@@ -15,4 +15,6 @@ public class Resources {
     public static final String STACK = "StackOverflow";
 
     public static final String REDDIT = "Reddit";
+
+    public static final String TMP_PATH = "tmp/inter";
 }
